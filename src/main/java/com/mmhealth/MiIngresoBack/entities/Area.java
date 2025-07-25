@@ -10,7 +10,7 @@ import java.util.List;
 @Data
 public class Area {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "ar_id")
     private Long id;
 

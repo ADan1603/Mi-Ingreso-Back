@@ -10,7 +10,7 @@ import java.util.List;
 @Data
 public class Empresa {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "emp_id")
     private Long id;
 

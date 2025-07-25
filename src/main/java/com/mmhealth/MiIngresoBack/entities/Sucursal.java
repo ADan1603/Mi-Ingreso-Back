@@ -11,7 +11,7 @@ import java.util.List;
 @Data
 public class Sucursal {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "suc_id")
     private Long id;
 

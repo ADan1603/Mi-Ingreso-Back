@@ -10,7 +10,7 @@ import java.util.List;
 @Data
 public class Colaborador {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "col_id")
     private Long id;
     @Column(name = "col_identificacion", length = 250)

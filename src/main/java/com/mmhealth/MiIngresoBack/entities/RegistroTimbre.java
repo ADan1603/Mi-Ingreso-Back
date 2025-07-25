@@ -7,7 +7,7 @@ import java.time.LocalDateTime;
 @Table(name = "registrotimbre")
 public class RegistroTimbre {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "reg_id")
     private Long id;
 
