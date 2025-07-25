@@ -3,6 +3,7 @@ package com.mmhealth.MiIngresoBack.services;
 import com.mmhealth.MiIngresoBack.entities.Empresa;
 import com.mmhealth.MiIngresoBack.repositories.EmpresaRepository;
 import com.mmhealth.MiIngresoBack.entities.Grupo;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.List;
@@ -26,7 +27,7 @@ public class EmpresaService {
 
     public Empresa findById(Long id) {
         return empresaRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Empresa no encontrada con id: " + id));
+                .orElseThrow(() -> new EntityNotFoundException("Empresa no encontrada con id: " + id));
     }
 
     public Empresa save(Empresa empresa) {

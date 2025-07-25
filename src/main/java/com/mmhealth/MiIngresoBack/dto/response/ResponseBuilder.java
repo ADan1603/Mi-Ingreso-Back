@@ -16,8 +16,8 @@ public class ResponseBuilder {
         return ResponseEntity.status(201).body(new CustomApiResponse<>("success", message, data));
     }
 
-    public static ResponseEntity<CustomApiResponse<Colaborador>> notFound(String message) {
-        return ResponseEntity.status(404).body(new CustomApiResponse<>("error", message, null));
+    public static <T> ResponseEntity<CustomApiResponse<T>> notFound(String message, T data) {
+        return ResponseEntity.status(404).body(new CustomApiResponse<>("error", message, data));
     }
 
     public static ResponseEntity<CustomApiResponse<Void>> error(int statusCode, String message) {

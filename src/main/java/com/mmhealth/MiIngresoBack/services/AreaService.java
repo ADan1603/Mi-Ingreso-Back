@@ -3,6 +3,7 @@ package com.mmhealth.MiIngresoBack.services;
 import com.mmhealth.MiIngresoBack.entities.Area;
 import com.mmhealth.MiIngresoBack.repositories.AreaRepository;
 import com.mmhealth.MiIngresoBack.entities.Sucursal;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.List;
@@ -26,7 +27,7 @@ public class AreaService {
 
     public Area findById(Long id) {
         return areaRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Área no encontrada con id: " + id));
+                .orElseThrow(() -> new EntityNotFoundException("Área no encontrada con id: " + id));
     }
 
     public Area save(Area area) {

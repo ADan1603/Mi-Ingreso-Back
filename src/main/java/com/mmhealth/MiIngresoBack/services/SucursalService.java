@@ -3,6 +3,7 @@ package com.mmhealth.MiIngresoBack.services;
 import com.mmhealth.MiIngresoBack.entities.Empresa;
 import com.mmhealth.MiIngresoBack.entities.Sucursal;
 import com.mmhealth.MiIngresoBack.repositories.SucursalRepository;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.List;
@@ -26,7 +27,7 @@ public class SucursalService {
 
     public Sucursal findById(Long id) {
         return sucursalRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Sucursal no encontrada con id: " + id));
+                .orElseThrow(() -> new EntityNotFoundException("Sucursal no encontrada con id: " + id));
     }
 
     public Sucursal save(Sucursal sucursal) {

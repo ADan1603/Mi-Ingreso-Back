@@ -1,6 +1,7 @@
 package com.mmhealth.MiIngresoBack.services;
 
 import com.mmhealth.MiIngresoBack.entities.Grupo;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.List;
@@ -18,7 +19,7 @@ public class GrupoService {
 
     public Grupo findById(Long id) {
         return grupoRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Grupo no encontrado con id: " + id));
+                .orElseThrow(() -> new EntityNotFoundException("Grupo no encontrado con id: " + id));
     }
 
     public Grupo save(Grupo grupo) {

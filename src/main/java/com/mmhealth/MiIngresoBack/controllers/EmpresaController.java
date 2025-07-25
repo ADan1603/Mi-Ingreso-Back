@@ -10,6 +10,7 @@ import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -38,8 +39,13 @@ public class EmpresaController {
     @GetMapping("/grupo/{grupoId}")
     public ResponseEntity<CustomApiResponse<List<Empresa>>> findByGrupoId(
             @Parameter(description = "ID del grupo") @PathVariable Long grupoId) {
-        List<Empresa> empresas = empresaService.findByGrupoId(grupoId);
-        return ResponseBuilder.success("Empresas del grupo obtenidas", empresas);
+        try{
+            List<Empresa> empresas = empresaService.findByGrupoId(grupoId);
+            return ResponseBuilder.success("Empresas del grupo obtenidas", empresas);
+        }
+        catch (EntityNotFoundException e) {
+            return ResponseBuilder.notFound(e.getMessage(), null);
+        }
     }
 
     @Operation(summary = "Obtener empresa por ID")
