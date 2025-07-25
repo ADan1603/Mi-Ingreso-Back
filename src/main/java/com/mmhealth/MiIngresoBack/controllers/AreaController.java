@@ -7,6 +7,7 @@ import com.mmhealth.MiIngresoBack.services.AreaService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -42,8 +43,13 @@ public class AreaController {
     @ApiResponse(responseCode = "200", description = "Área encontrada")
     @GetMapping("/{id}")
     public ResponseEntity<CustomApiResponse<Area>> findById(@PathVariable Long id) {
+        try{
         Area area = areaService.findById(id);
         return ResponseBuilder.success("Área encontrada", area);
+        } catch (
+        EntityNotFoundException e) {
+            return ResponseBuilder.notFound(e.getMessage(), null);
+        }
     }
 
     @Operation(summary = "Crear nueva área")

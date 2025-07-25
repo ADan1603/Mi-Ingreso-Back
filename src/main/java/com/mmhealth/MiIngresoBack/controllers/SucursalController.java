@@ -7,6 +7,7 @@ import com.mmhealth.MiIngresoBack.services.SucursalService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -34,8 +35,13 @@ public class SucursalController {
     @GetMapping("/empresa/{empresaId}")
     public ResponseEntity<CustomApiResponse<List<Sucursal>>> findByEmpresaId(
             @PathVariable Long empresaId) {
-        List<Sucursal> sucursales = sucursalService.findByEmpresaId(empresaId);
-        return ResponseBuilder.success("Sucursales de la empresa obtenidas", sucursales);
+        try{List<Sucursal> sucursales = sucursalService.findByEmpresaId(empresaId);
+            return ResponseBuilder.success("Sucursales de la empresa obtenidas", sucursales);
+        }
+        catch (
+                EntityNotFoundException e) {
+            return ResponseBuilder.notFound(e.getMessage(), null);
+        }
     }
 
     @Operation(summary = "Obtener sucursal por ID")

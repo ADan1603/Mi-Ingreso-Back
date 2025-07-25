@@ -10,6 +10,7 @@ import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -40,8 +41,12 @@ public class GrupoController {
     @GetMapping("/{id}")
     public ResponseEntity<CustomApiResponse<Grupo>> findById(
             @Parameter(description = "ID del grupo", example = "1") @PathVariable Long id) {
-        Grupo grupo = grupoService.findById(id);
-        return ResponseBuilder.success("Grupo encontrado", grupo);
+        try {
+            Grupo grupo = grupoService.findById(id);
+            return ResponseBuilder.success("Grupo encontrado", grupo);
+        } catch (EntityNotFoundException e) {
+            return ResponseBuilder.notFound(e.getMessage(), null);
+        }
     }
 
     @Operation(summary = "Crear nuevo grupo")
