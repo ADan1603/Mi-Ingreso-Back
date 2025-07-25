@@ -24,10 +24,16 @@ public class Sucursal {
     @Column(name = "suc_telefono", length = 40)
     private String telefono;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "suc_emp_id", referencedColumnName = "emp_id")
     private Empresa empresa;
 
-    @OneToMany(mappedBy = "sucursal", cascade = CascadeType.ALL)
-    private List<Area> areas = new ArrayList<>();
+    @OneToMany(mappedBy = "sucursal")
+    private List<Area> areas;
+
+    @OneToMany(mappedBy = "sucursal")
+    private List<Pertenencia> pertenencias;
+
+    @OneToMany(mappedBy = "sucursal")
+    private List<PermisoTemporal> permisosTemporales;
 }
