@@ -3,6 +3,8 @@ package com.mmhealth.MiIngresoBack.entities;
 import jakarta.persistence.*;
 import lombok.Data;
 
+import java.util.List;
+
 @Entity
 @Table(name = "empresa")
 @Data
@@ -30,10 +32,18 @@ public class Empresa {
     @Column(name = "emp_telefono", length = 20)
     private String telefono;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "grp_emp_id", referencedColumnName = "gr_id")
     private Grupo grupo;
 
-    @OneToMany(mappedBy = "empresa", cascade = CascadeType.ALL)
-    private List<Sucursal> sucursales = new ArrayList<>();
-}
+    @OneToMany(mappedBy = "empresa")
+    private List<Sucursal> sucursales;
+
+    @OneToMany(mappedBy = "empresa")
+    private List<Usuario> usuarios;
+
+    @OneToMany(mappedBy = "empresa")
+    private List<Pertenencia> pertenencias;
+
+    @OneToMany(mappedBy = "empresa")
+    private List<PermisoTemporal> permisosTemporales;}

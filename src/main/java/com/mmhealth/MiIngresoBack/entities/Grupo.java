@@ -23,6 +23,15 @@ public class Grupo {
     @Column(name = "gr_estado", length = 20)
     private String estado;
 
-    @OneToMany(mappedBy = "grupo", cascade = CascadeType.ALL)
-    private List<Empresa> empresas = new ArrayList<>();
+    @OneToMany(mappedBy = "grupo")
+    private List<Empresa> empresas;
+
+    @OneToMany(mappedBy = "grupo")
+    private List<Usuario> usuarios;
+
+    @OneToMany(mappedBy = "grupo")
+    private List<Pertenencia> pertenencias;
+
+    @OneToMany(mappedBy = "grupo")
+    private List<PermisoTemporal> permisosTemporales;
 }

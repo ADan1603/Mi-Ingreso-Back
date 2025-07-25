@@ -14,22 +14,22 @@ public class Pertenencia {
     @Column(name = "per_id")
     private Long id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "per_gr_id", referencedColumnName = "gr_id")
+    @ManyToOne
+    @JoinColumn(name = "per_gr_id", referencedColumnName = "gr_id", nullable = false)
     private Grupo grupo;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "per_emp_id", referencedColumnName = "emp_id")
     private Empresa empresa;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "per_suc_id", referencedColumnName = "suc_id")
     private Sucursal sucursal;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "per_ar_id", referencedColumnName = "ar_id")
     private Area area;
 
-    @OneToMany(mappedBy = "pertenencia", cascade = CascadeType.ALL)
-    private List<Colaborador> colaboradores = new ArrayList<>();
+    @OneToMany(mappedBy = "pertenencia")
+    private List<Colaborador> colaboradores;
 }

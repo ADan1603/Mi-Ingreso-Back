@@ -3,6 +3,8 @@ package com.mmhealth.MiIngresoBack.entities;
 import jakarta.persistence.*;
 import lombok.Data;
 
+import java.util.List;
+
 @Entity
 @Table(name = "area")
 @Data
@@ -18,7 +20,13 @@ public class Area {
     @Column(name = "ar_departamento", length = 40)
     private String departamento;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "ar_suc_id", referencedColumnName = "suc_id")
     private Sucursal sucursal;
+
+    @OneToMany(mappedBy = "area")
+    private List<Pertenencia> pertenencias;
+
+    @OneToMany(mappedBy = "area")
+    private List<PermisoTemporal> permisosTemporales;
 }
