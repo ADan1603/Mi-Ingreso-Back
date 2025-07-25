@@ -1,4 +1,5 @@
 package com.mmhealth.MiIngresoBack.entities;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 
 @Entity
@@ -18,11 +19,13 @@ public class Usuario {
     @Column(name = "gr_estado", length = 20)
     private String estado;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "usu_gr_id", referencedColumnName = "gr_id")
+    @JsonBackReference
     private Grupo grupo;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "usu_emp_id", referencedColumnName = "emp_id")
+    @JsonBackReference
     private Empresa empresa;
 }

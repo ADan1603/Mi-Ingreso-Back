@@ -1,5 +1,7 @@
 package com.mmhealth.MiIngresoBack.entities;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -18,26 +20,32 @@ public class PermisoTemporal {
     @Column(name = "pt_estado", length = 1)
     private String estado;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "pt_gr_id", referencedColumnName = "gr_id")
+    @JsonBackReference
     private Grupo grupo;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "pt_emp_id", referencedColumnName = "emp_id")
+    @JsonBackReference
     private Empresa empresa;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "pt_suc_id", referencedColumnName = "suc_id")
+    @JsonBackReference
     private Sucursal sucursal;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "pt_ar_id", referencedColumnName = "ar_id")
+    @JsonBackReference
     private Area area;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "pt_col_id", referencedColumnName = "col_id")
+    @JsonBackReference
     private Colaborador colaborador;
 
-    @OneToMany(mappedBy = "permisoTemporal")
+    @OneToMany(mappedBy = "permisoTemporal", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JsonManagedReference
     private List<RegistroTimbre> registrosTimbre;
 }

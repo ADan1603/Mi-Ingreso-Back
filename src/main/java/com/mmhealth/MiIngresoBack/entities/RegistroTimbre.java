@@ -1,5 +1,6 @@
 package com.mmhealth.MiIngresoBack.entities;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import java.time.LocalDateTime;
 
@@ -38,11 +39,13 @@ public class RegistroTimbre {
     @Column(name = "reg_area_nombre", length = 150)
     private String areaNombre;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "reg_pt_id", referencedColumnName = "pt_id")
+    @JsonBackReference
     private PermisoTemporal permisoTemporal;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "reg_col_id", referencedColumnName = "col_id")
+    @JsonBackReference
     private Colaborador colaborador;
 }

@@ -1,5 +1,7 @@
 package com.mmhealth.MiIngresoBack.entities;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -24,16 +26,20 @@ public class Sucursal {
     @Column(name = "suc_telefono", length = 40)
     private String telefono;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "suc_emp_id", referencedColumnName = "emp_id")
+    @JsonBackReference
     private Empresa empresa;
 
-    @OneToMany(mappedBy = "sucursal")
+    @OneToMany(mappedBy = "sucursal", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JsonManagedReference
     private List<Area> areas;
 
-    @OneToMany(mappedBy = "sucursal")
+    @OneToMany(mappedBy = "sucursal", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JsonManagedReference
     private List<Pertenencia> pertenencias;
 
-    @OneToMany(mappedBy = "sucursal")
+    @OneToMany(mappedBy = "sucursal", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JsonManagedReference
     private List<PermisoTemporal> permisosTemporales;
 }
