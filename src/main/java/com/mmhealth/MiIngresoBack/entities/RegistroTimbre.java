@@ -48,4 +48,100 @@ public class RegistroTimbre {
     @JoinColumn(name = "reg_col_id", referencedColumnName = "col_id")
     @JsonBackReference
     private Colaborador colaborador;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public LocalDateTime getFechaRegistro() {
+        return fechaRegistro;
+    }
+
+    public void setFechaRegistro(LocalDateTime fechaRegistro) {
+        this.fechaRegistro = fechaRegistro;
+    }
+
+    public String getEstado() {
+        return estado;
+    }
+
+    public void setEstado(String estado) {
+        this.estado = estado;
+    }
+
+    public String getTipoTimbre() {
+        return tipoTimbre;
+    }
+
+    public void setTipoTimbre(String tipoTimbre) {
+        this.tipoTimbre = tipoTimbre;
+    }
+
+    public String getIdentificacion() {
+        return identificacion;
+    }
+
+    public void setIdentificacion(String identificacion) {
+        this.identificacion = identificacion;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public String getRazonSocial() {
+        return razonSocial;
+    }
+
+    public void setRazonSocial(String razonSocial) {
+        this.razonSocial = razonSocial;
+    }
+
+    public String getNombreComercial() {
+        return nombreComercial;
+    }
+
+    public void setNombreComercial(String nombreComercial) {
+        this.nombreComercial = nombreComercial;
+    }
+
+    public String getSucursalNombre() {
+        return sucursalNombre;
+    }
+
+    public void setSucursalNombre(String sucursalNombre) {
+        this.sucursalNombre = sucursalNombre;
+    }
+
+    public String getAreaNombre() {
+        return areaNombre;
+    }
+
+    public void setAreaNombre(String areaNombre) {
+        this.areaNombre = areaNombre;
+    }
+
+    public PermisoTemporal getPermisoTemporal() {
+        return permisoTemporal;
+    }
+
+    public void setPermisoTemporal(PermisoTemporal permisoTemporal) {
+        this.permisoTemporal = permisoTemporal;
+    }
+
+    public Colaborador getColaborador() {
+        return colaborador;
+    }
+
+    public void setColaborador(Colaborador colaborador) {
+        this.colaborador = colaborador;
+    }
 }

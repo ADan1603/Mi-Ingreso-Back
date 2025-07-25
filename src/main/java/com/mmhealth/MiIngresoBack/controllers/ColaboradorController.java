@@ -6,6 +6,7 @@ import com.mmhealth.MiIngresoBack.entities.Colaborador;
 import com.mmhealth.MiIngresoBack.services.ColaboradorService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -35,7 +36,7 @@ public class ColaboradorController {
             Optional<Colaborador> colaborador = colaboradorService.obtenerPorIdentificacion(identificacion);
             return colaborador
                     .map(c -> ResponseBuilder.success("Colaborador encontrado", c))
-                    .orElseGet(() -> ResponseBuilder.notFound("Colaborador no encontrado"));
+                    .orElseGet(() -> ResponseBuilder.notFound("Colaborador no encontrado",null));
         }
 
         @Operation(summary = "Obtener colaboradores por estado")
@@ -50,10 +51,14 @@ public class ColaboradorController {
         @ApiResponse(responseCode = "200", description = "Colaborador encontrado")
         @GetMapping("/email/{email}")
         public ResponseEntity<CustomApiResponse<Colaborador>> findByEmail(@PathVariable String email) {
-            Optional<Colaborador> colaborador = colaboradorService.obtenerPorEmail(email);
-            return colaborador
-                    .map(c -> ResponseBuilder.success("Colaborador encontrado", c))
-                    .orElseGet(() -> ResponseBuilder.notFound("Colaborador no encontrado"));
+            try{
+                Optional<Colaborador> colaborador = colaboradorService.obtenerPorEmail(email);
+                return ResponseBuilder.success("Colaboradores encontrados", colaborador.get());
+
+            }catch (EntityNotFoundException e) {
+                return ResponseBuilder.notFound(e.getMessage(), null);
+            }
+
         }
 
         @Operation(summary = "Obtener colaboradores por pertenencia")
