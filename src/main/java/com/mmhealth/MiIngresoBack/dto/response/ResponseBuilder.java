@@ -1,5 +1,6 @@
 package com.mmhealth.MiIngresoBack.dto.response;
 
+import com.mmhealth.MiIngresoBack.entities.Colaborador;
 import org.springframework.http.ResponseEntity;
 
 public class ResponseBuilder {
@@ -15,7 +16,7 @@ public class ResponseBuilder {
         return ResponseEntity.status(201).body(new CustomApiResponse<>("success", message, data));
     }
 
-    public static ResponseEntity<CustomApiResponse<Void>> notFound(String message) {
+    public static ResponseEntity<CustomApiResponse<Colaborador>> notFound(String message) {
         return ResponseEntity.status(404).body(new CustomApiResponse<>("error", message, null));
     }
 

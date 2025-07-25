@@ -15,6 +15,7 @@ public class Colaborador {
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "col_id")
     private Long id;
+
     @Column(name = "col_identificacion", length = 250)
     private String identificacion;
 
@@ -29,13 +30,14 @@ public class Colaborador {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "col_per_id", referencedColumnName = "per_id")
-    @JsonBackReference
+    @JsonBackReference("colaborador-pertenencia")
     private Pertenencia pertenencia;
 
     @OneToMany(mappedBy = "colaborador", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JsonManagedReference
+    @JsonManagedReference("colaborador-permisos")
     private List<PermisoTemporal> permisosTemporales;
 
     @OneToMany(mappedBy = "colaborador", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JsonManagedReference("colaborador-timbres")
     private List<RegistroTimbre> registrosTimbre;
 }
